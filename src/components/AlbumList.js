@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, Text } from 'react-native';
 import axios from 'axios';
 import AlbumDetail from './AlbumDetail';
-import { List, ListItem, SearchBar } from "react-native-elements";
+import { List } from "react-native-elements";
 
 class AlbumList extends Component {
   state = { photoset: null };
@@ -12,16 +12,7 @@ class AlbumList extends Component {
       .then(response => this.setState({ photoset: response.data.photosets.photoset }));
   }
 
-  renderAlbums() {
-    return this.state.photoset.map(album =>
-      <AlbumDetail key={album.id} title={album.title._content}  albumId={album.id}  />
-    );
-  }
-
   render() {
-    console.log(this.state);
-
-
     if (!this.state.photoset) { 
 			return (
 					<Text>

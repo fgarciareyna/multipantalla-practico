@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, FlatList } from 'react-native';
 import axios from 'axios';
 import PhotoDetail from './PhotoDetail';
+import { List } from "react-native-elements";
 
 class PhotoList extends Component {
   state = { photos: null };
@@ -11,32 +12,27 @@ class PhotoList extends Component {
       .then(response => this.setState({ photos: response.data.photoset.photo }));
   }
 
-  renderAlbums() {
-    return this.state.photos.map(photo =>
-      <PhotoDetail key={photo.title} title={photo.title} imageUrl={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
-    );
-  }
-
   render() {
-    console.log(this.state);
-
-
-    if (!this.state.photos) { 
-			return (
-                <View style={{ flex: 1 }}>
-					<Text>
-                        Loading...
+    if (!this.state.photos) {
+      return (
+        <View style={{ flex: 1 }}>
+          <Text>
+            Loading...
 					</Text>
-                </View>
-				);
+        </View>
+      );
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <ScrollView>
-                {this.renderAlbums()}
-            </ScrollView>
-        </View>
+      <List>
+        <FlatList
+        data={this.state.photos}
+        renderItem={({ item }) => (
+          <PhotoDetail key={item.title} title={item.title} imageUrl={`https://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`} />
+        )}
+        keyExtractor={item => item.title}
+        />
+      </List>
     );
   }
 }
