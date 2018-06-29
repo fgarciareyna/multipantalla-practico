@@ -5,10 +5,10 @@ import AlbumDetail from './AlbumDetail';
 import { List } from "react-native-elements";
 
 class AlbumList extends Component {
-  state = { photoset: null };
+  state = { photoset: null, user_id: "60216816%40N00" };
 
   componentWillMount() {
-    axios.get('https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&user_id=137290658%40N08&format=json&nojsoncallback=1')
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photosets.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&user_id=${this.state.user_id}&format=json&nojsoncallback=1`)
       .then(response => this.setState({ photoset: response.data.photosets.photoset }));
   }
 
@@ -26,7 +26,7 @@ class AlbumList extends Component {
         <FlatList
         data={this.state.photoset}
         renderItem={({ item }) => (
-          <AlbumDetail key={item.id} title={item.title._content}  albumId={item.id}  />
+          <AlbumDetail key={item.id} title={item.title._content}  albumId={item.id} userId={this.state.user_id} />
         )}
         keyExtractor={item => item.id}
         />
