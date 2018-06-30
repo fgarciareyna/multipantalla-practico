@@ -7,6 +7,7 @@ import Header from './src/components/header';
 import AlbumList from './src/components/AlbumList';
 import PhotoList from './src/components/PhotoList';
 import { Router, Scene } from 'react-native-router-flux';
+import CommentList from './src/components/CommentList';
 
 // Create a component
 const App = () => (
@@ -14,6 +15,7 @@ const App = () => (
         <Scene key="root">
           <Scene key="albumList" component={AlbumList} title="Albums" initial={true} />
           <Scene key="photoList" component={PhotoList} title="Photos" />
+          <Scene key="commentList" component={CommentList} title="Comments" />
         </Scene>
       </Router>
 );

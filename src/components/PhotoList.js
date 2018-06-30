@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Alert, Button } from 'react-native';
+import { Text, View, FlatList, Button } from 'react-native';
 import axios from 'axios';
 import PhotoDetail from './PhotoDetail';
 import { List } from "react-native-elements";
@@ -31,7 +31,7 @@ class PhotoList extends Component {
 
   handleRefreshing = () => {
     this.setState({
-      refreshing: false
+      refreshing: true
     },
       () => {
         this.makeRemoteRequest();
@@ -53,19 +53,19 @@ class PhotoList extends Component {
 
   renderHeader = () => {
     return (<View>
-    <Button
-      onPress={this.sortByName}
-      title="By Name"
-    />
-    <Button
-      onPress={this.sortByDate}
-      title="By Date"
-    />
+      <Button
+        onPress={this.sortByName}
+        title="By Name"
+      />
+      <Button
+        onPress={this.sortByDate}
+        title="By Date"
+      />
     </View>);
   };
 
   render() {
-   if (!this.state.photos) {
+    if (!this.state.photos) {
       return (
         <View style={{ flex: 1 }}>
           <Text>
@@ -80,7 +80,7 @@ class PhotoList extends Component {
         <FlatList
           data={this.state.photos}
           renderItem={({ item }) => (
-            <PhotoDetail key={item.title} title={item.title} imageUrl={`https://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`} />
+            <PhotoDetail key={item.title} title={item.title} imageUrl={`https://farm${item.farm}.staticflickr.com/${item.server}/${item.id}_${item.secret}.jpg`} photoId={item.id} />
           )}
           keyExtractor={item => item.id}
           onRefresh={this.handleRefreshing}

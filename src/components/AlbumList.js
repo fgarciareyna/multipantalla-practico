@@ -25,7 +25,7 @@ class AlbumList extends Component {
 
   handleRefreshing = () => {
     this.setState({ 
-      refreshing: false 
+      refreshing: true 
     },
     () => {
       this.makeRemoteRequest();
