@@ -8,7 +8,7 @@ class AlbumList extends Component {
   state = { 
     photoset: null, 
     user_id: "60216816%40N00",
-    refreshing: false 
+    refreshing: false,
    };
 
   componentWillMount() {
@@ -47,7 +47,11 @@ class AlbumList extends Component {
         <FlatList
         data={this.state.photoset}
         renderItem={({ item }) => (
-          <AlbumDetail key={item.id} title={item.title._content}  albumId={item.id} userId={this.state.user_id} />
+          <AlbumDetail 
+          key={item.id} 
+          title={item.title._content}  
+          albumId={item.id} 
+          userId={this.state.user_id} />
         )}
         keyExtractor={item => item.id}
         onRefresh={this.handleRefreshing}
