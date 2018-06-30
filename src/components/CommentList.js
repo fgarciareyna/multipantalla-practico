@@ -8,6 +8,7 @@ class CommentList extends Component {
 
     state = {
         comments: null,
+        hasComments: true,
         refreshing: false
     }
 
@@ -18,10 +19,18 @@ class CommentList extends Component {
     makeRemoteRequest = () => {
         axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photo_id=${this.props.photoId}&format=json&nojsoncallback=1`)
             .then(response => {
-                this.setState({
-                    comments: response.data.comments.comment,
-                    refreshing: false
-                })
+                if (response.data.comments.comment) {
+                    this.setState({
+                        comments: response.data.comments.comment,
+                        refreshing: false
+                    })
+                } else {
+                    this.setState({
+                        hasComments: false,
+                        refreshing: false
+                    })
+                }
+                
             });
     }
 
@@ -36,6 +45,16 @@ class CommentList extends Component {
     }
 
     render() {
+        if (!this.state.hasComments) {
+            return (
+                <View style={{ flex: 1 }}>
+                    <Text>
+                        This photo has no comments...
+                        </Text>
+                </View>
+            );
+        }
+
         if (!this.state.comments) {
             return (
                 <View style={{ flex: 1 }}>
@@ -63,7 +82,3 @@ class CommentList extends Component {
 }
 
 export default CommentList;
-
-//id
-//realname
-//_content
