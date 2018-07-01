@@ -5,21 +5,22 @@ import CardSection from './CardSection';
 
 const CommentDetail = ({ author, comment }) => {
     const {
-        headerTextStyle,
-        commentTextStyle
+        headerContentStyle,
+        bodyContentStyle,
+        headerTextStyle
     } = styles;
 
     return (
         <Card>
             <CardSection>
-                <View>
+                <View style={headerContentStyle}>
                     <Text style={headerTextStyle}>{author}</Text>
                 </View>
             </CardSection>
 
             <CardSection>
-                <View>
-                    <Text style={commentTextStyle}>{comment}</Text>
+                <View style={bodyContentStyle}>
+                    <Text style={headerTextStyle}>{comment}</Text>
                 </View>
             </CardSection>
         </Card>
@@ -28,13 +29,20 @@ const CommentDetail = ({ author, comment }) => {
 
 
 const styles = {
-    headerTextStyle: {
-        fontSize: 18,
-        fontWeight: 'bold'
+    headerContentStyle: {
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#CFEFFA',
+        flex: 1
     },
-    commentTextStyle: {
-        fontSize: 14,
-        textAline: 'justify'
+    bodyContentStyle: {
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#D7F7F2',
+        flex: 1
+    },
+    headerTextStyle: {
+        fontSize: 18
     }
 };
 
