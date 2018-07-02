@@ -38,7 +38,7 @@ const PhotoDetail = ({ title, imageUrl, photoId }) => {
 
       <CardSection>
         <Button onPress={() => Linking.openURL(imageUrl)}>
-          See Now!
+          Open Now!
         </Button>
       </CardSection>
 

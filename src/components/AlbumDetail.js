@@ -24,7 +24,7 @@ const AlbumDetail = ({ title, albumId, userId }) => {
 
       <CardSection>
         <Button onPress={() => Actions.photoList({albumId:albumId, userId:userId})}>
-          See Now!
+          See Photos Now!
         </Button>
       </CardSection>
     </Card>
